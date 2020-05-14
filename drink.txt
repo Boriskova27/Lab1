@@ -1,2 +1,5 @@
-Voda 40
-Cola 50
+2
+Vodka
+150
+cola
+56

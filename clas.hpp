@@ -30,9 +30,9 @@ shop(){};
 };
 void print_food (shop* df, int n,string name);
 void print_drink (shop* dd, int n,string name);
-void  push_food (shop* (&df), int& n);
-void push_drink (shop* dd, int n);
-void delete_food(shop* (&df), int& n);
-void delete_drink(shop* (&dd), int& n);
-
+void push_food (shop* (&df), int &n,int  &k);
+void push_drink (shop* (&dd), int &n, int &k);
+void delete_food(shop* (&df), int& n,int &k);
+void delete_drink(shop* (&dd), int& n,int &k);
+int max(int a,int b);
 #endif // TEST_H

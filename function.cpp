@@ -17,7 +17,6 @@ ostream & operator <<(ostream & out, const food &foo) {
     return out;
 }
 
-
 istream & operator >>(istream & in, drink &dr) {
     
     in >> dr.name; 
@@ -30,19 +29,20 @@ ostream & operator <<(ostream & out, const drink &dr) {
     return out;
 }
 
-
-void print_food (shop* df, int n,string name)
-{
-for (int i = 0; i < n; i++)
-{
-if (df[i].foo.name==name)
-{
-  cout<<df[i].foo;
-  };
+int max(int a,int b){
+  if (a>b)
+    return a;
+  return b;
 }
+void print_food (shop* df, int n,string name){
+for (int i = 0; i < n; i++)
+  {
+    if (df[i].foo.name==name){
+      cout<<df[i].foo;
+    };
+  }
 } 
-void print_drink (shop* dd, int n,string name)
-{
+void print_drink (shop* dd, int n,string name){
 	for (int i = 0; i < n; i++)
 {
 if (dd[i].dr.name==name)
@@ -52,72 +52,90 @@ if (dd[i].dr.name==name)
 }
 }
 
-void  push_food (shop* (&df), int& n)
+void  push_food (shop* (&df2), int& n, int &k)
 {
 	food foo;
-	shop* df2 = new shop[n];
-	int k = n;
-	int new_k = ++n;
-	df = new shop[new_k];
-  for(int i=0; i<=n; i++)
-  {
-    df2[i]=df[i];
-  }
+	int new_k =max(n,k)+1;
+	shop *df = new shop[new_k];
+  for(int i=0; i<n; i++)
+    df[i].foo=df2[i].foo;
+  for (int i=0;i<k;i++)
+    df[i].dr=df2[i].dr;
 
-	cout << "Введите название товара" << endl;
-	cin >> foo.name;
-	cout << "Введите вес товара" << endl;
-	cin >> foo.weight;
-	cout << "Введите цену товара" << endl;
-	cin >> foo.price;
+  cout<<"Введите товар: имя,вес,цену"<<endl;
+	cin>>foo;
+  df[n].foo=foo;
+  
 	delete[] df2;
+  n=new_k;
+  df2=df;
+  delete[] df;
 }
 
 
- void push_drink (shop* dd, int n)
+ void push_drink (shop* (&dd2), int &n,int &k)
 {
 	drink dr;
-	shop* dd2 = new shop[n];
-	int k = n;
-	int new_k = ++n;
-  dd = new shop[new_k];
-	 for(int i=0; i<=n; i++)
-  {
-    dd2[i]=dd[i];
-  }
+  int new_k = max(n,k)+1;
+	shop* dd = new shop[new_k];
 
-	cout << "Введите название товара" << endl;
-	cin >> dr.name;
-	cout << "Введите цену товара" << endl;
-	cin >> dr.price;
-	delete[] dd2;
+	for(int i=0; i<k; i++)
+  {
+    dd[i].dr=dd2[i].dr;
+  }
+  for (int i=0;i<n;i++)
+    dd[i].foo=dd2[i].foo;
+  cout<<"Введите напиток: имя,цену"<<endl;
+  cin>>dr;
+	dd[k].dr=dr;
+  delete[] dd2;
+  k++;
+  dd2=dd;
+  delete[] dd;
 }
 
-void delete_food(shop* (&df), int& n)
+void delete_food(shop* (&df2), int& n,int &k)
 {
-	shop* df2 = new shop[n];
+	shop* df = new shop[n];
 	cout << "Название продукта" << endl;
 	string str1;
   cin >> str1;
-  for(int i=0; i<=n; i++){
-    if (str1 != df[i].foo.name){
-     n--;
-df= new shop[n];
+  int j=0;
+  for(int i=0; i<n; i++){
+    if (str1 != df2[i].foo.name){
+      df[j].foo=df2[i].foo;
+      j++;
     }
   }
+  for (int i=0;i<k;i++)
+    df[i].dr=df2[i].dr;
+  delete[] df2;
+  n=j;
+  df2=df;
+  delete[] df;
 }
 
 
-void delete_drink(shop* (&dd), int& n)
+
+
+
+void delete_drink(shop* (&dd2), int& n,int &k)
 {
-	shop* dd2 = new shop[n];
+	shop* dd = new shop[n];
 	cout << "Название напитка" << endl;
 	string str1;
   cin >> str1;
-  for(int i=0; i<=n; i++){
-    if (str1 != dd[i].dr.name){
-     n--;
-dd= new shop[n];
+  int j=0;
+  for(int i=0; i<k; i++){
+    if (str1 != dd2[i].dr.name){
+      dd[j].dr=dd2[i].dr;
+      j++;
     }
   }
+  for (int i=0;i<n;i++)
+    dd[i].foo=dd2[i].foo;
+  delete[] dd2;
+  k=j;
+  dd2=dd;
+  delete[] dd;
 }
