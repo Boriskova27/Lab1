@@ -139,3 +139,49 @@ void delete_drink(shop* (&dd2), int& n,int &k)
   dd2=dd;
   delete[] dd;
 }
+
+void fix_drink(shop* (&dd2), int& n, int& k) {
+    shop* dd = new shop[n];
+    cout << " Введите название напитка, который вы хотите изменить" << endl;
+    string str;
+    cin >> str;
+    int j = 0;
+    for (int i = 0; i < k; i++) {
+        if (str != dd2[i].dr.name) {
+            cout << "введите новое название напитка" << endl;
+            string s;
+            cin >> s;
+            dd2[i].dr.name = s;
+            cout << "Введите новую цену напитка" << endl;
+            int p;
+            cin >> p;
+            dd2[i].dr.price = p;
+        }
+    }
+}
+
+void fix_food(shop* (&df2), int& n, int& k) {
+    shop* df = new shop[n];
+    cout << " Введите название продукта, который вы хотите изменить" << endl;
+    string str;
+    cin >> str;
+    int j = 0;
+    for (int i = 0; i < k; i++) {
+        if (str != dd2[i].dr.name) {
+            cout << "введите новое название продукта" << endl;
+            string s;
+            cin >> s;
+            df2[i].df.name = s;
+            cout << "Введите новый вес" << endl;
+            int p;
+            cin >> p;
+            df2[i].df.weight = p;
+            cout << "Введите новую цену" << endl;
+            int y;
+            cin >> y;
+            df2[i].df.price = y;
+        }
+    }
+}
+    
+

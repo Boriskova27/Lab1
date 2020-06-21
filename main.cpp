@@ -1,15 +1,24 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <clocale>
 #include "clas.hpp"
 using namespace std;
 
 int main(int ac, char *argv[]) {
   int i,n,k;
+  if (argc <= 2) {
+      cout << "Не заданы имена файлов" << endl;
+      return 0;
+  }
   food foo;
   drink dr;
   ifstream f(argv[1]);
   ifstream d(argv[2]);
+  if (!f.is_open() & d.is_open()) {
+      cout << "Ошибка открытия файлов" << endl;
+      return 0;
+  }
   f>>n;
   shop* df2 = new shop[n];
   for (int i=0;i<n;i++){
@@ -24,6 +33,7 @@ int main(int ac, char *argv[]) {
   }
   f.close();
   d.close();
+  SetLocale(LC_ALL, "Rus");
   int b;
   for(;;){
     system("clear");
@@ -32,7 +42,8 @@ int main(int ac, char *argv[]) {
     cout<<"2-Посмотреть информацию о конкретном товаре"<<endl;
     cout<<"3-Добавить товар на склад"<<endl;
     cout<<"4-Удалить товар со склада"<<endl;
-    cout<<"5-Выход"<<endl;
+    cout<<"5-Изменить информацию о товаре" << endl;
+    cout<<"6-Выход"<<endl;
     cin>>b;
     while (b==1){
       
@@ -100,7 +111,22 @@ int main(int ac, char *argv[]) {
       cout<<"0-Вернуться назад\n";
       cin>>b;
     }
-    if (b==5){
+    if (b == 5) {
+        system("clear");
+        cout<< "Введите 1 если напиток, 0-если еда\n";
+        int h;
+        cin >> h;
+        if (h == 0) {
+            fix_food(df2, n, k);
+        }
+        else {
+            fix_drink(dd2, n, k);
+        }
+        cout << "5-Изменить ещё один продукт" << endl;
+        cout << "0-Вернуться назад" << endl;
+        cin >> b;
+    }
+    if (b==6){
       system("clear");
       ofstream f(argv[1], ios_base::trunc);
       ofstream d(argv[2], ios_base::trunc);

@@ -34,5 +34,7 @@ void push_food (shop* (&df), int &n,int  &k);
 void push_drink (shop* (&dd), int &n, int &k);
 void delete_food(shop* (&df), int& n,int &k);
 void delete_drink(shop* (&dd), int& n,int &k);
+void fix_food(shop* (&df2), int& n, int& k);
+void fix_drink(shop* (&dd2), int& n, int& k);
 int max(int a,int b);
 #endif // TEST_H
