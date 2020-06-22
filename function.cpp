@@ -167,7 +167,7 @@ void fix_food(shop* (&df2), int& n, int& k) {
     cin >> str;
     int j = 0;
     for (int i = 0; i < k; i++) {
-        if (str != dd2[i].dr.name) {
+        if (str != df2[i].dr.name) {
             cout << "введите новое название продукта" << endl;
             string s;
             cin >> s;
